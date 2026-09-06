@@ -3,4 +3,8 @@
 	url = https://github.com/SagerNet/sing-box-for-apple.git
 [submodule "clients/android"]
 	path = clients/android
-	url = https://github.com/SagerNet/sing-box-for-android.git
+	url = https://github.com/tiniDeveloper/sing-box-for-android.git
+[submodule "third_party/tailscale"]
+	path = third_party/tailscale
+	url = https://github.com/tiniDeveloper/tailscale.git
+	branch = codex/android5-tsnet-fix

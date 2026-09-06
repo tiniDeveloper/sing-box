@@ -1,5 +1,8 @@
 module github.com/sagernet/sing-box
 
+// Pinned submodule containing the Android 5 tsnet executable-path fallback.
+replace github.com/sagernet/tailscale => ./third_party/tailscale
+
 go 1.24.7
 
 require (
