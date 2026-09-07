@@ -36,3 +36,29 @@ This is a diagnostic build, not a production release or automatic updater.
 
 Passing the APK build does not prove Android 5 runtime compatibility. Record
 any subsequent startup error before changing DNS or routing settings.
+
+## Verified on ZTE Blade L3 (2026-09-07)
+
+The ARMv7 APK from workflow run 34049226802 installed successfully on Android
+5.0.2 (API 21), kernel 3.10.54. The original `readlink /proc/self/exe`
+failure no longer occurs. No root access or SELinux changes were used.
+
+The next error was `x509: certificate signed by unknown authority` during
+control-key retrieval. Adding the following top-level configuration field
+resolved it using sing-box's bundled trust store, with TLS verification intact:
+
+```json
+"certificate": {
+  "store": "mozilla"
+}
+```
+
+The endpoint then reached `Starting -> Running`, received successful control
+map updates and established a DERP connection. After stopping and starting the
+service again, it loaded its saved state and reached `Running` again. SELinux
+remained Enforcing throughout.
+
+The tested profile only contains a Tailscale endpoint. Android app traffic is
+not automatically routed through it: a TUN/proxy inbound and suitable routing
+must be configured for that use case. A connection to a specific tailnet
+application service has not yet been verified.
